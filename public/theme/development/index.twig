@@ -6,9 +6,6 @@
     <div class="container">
         <div class="columns">
             <div class="column is-two-thirds">
-            
-                {# Remove this include if you don't need it anymore. #}
-                {{ include('partials/_fresh_install.twig') }}
 
                 {% setcontent homepage = "homepage" limit 1 returnsingle %}
                 {% if homepage %}
@@ -17,7 +14,6 @@
                     <div class="teaser">{{ homepage.teaser }}</div>
                     {{ homepage.content }}
 
-                    {% include 'partials/_record_meta.twig' with {'record': homepage } %}
                 </div>
                 {% else %}
                     {# Remove this include if you don't need it anymore. #}

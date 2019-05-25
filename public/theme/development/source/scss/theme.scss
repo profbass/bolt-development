@@ -127,7 +127,7 @@ p.meta {
 }
 
 
-.hero-image {
+.hero.hero-image { 
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -137,6 +137,7 @@ p.meta {
 .hero.is-large .hero-body {
     padding-bottom: 4rem;
     padding-top: 4rem;
+    color: #ffffff;
     h1.title,
     h2.subtitle {
         text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.4);

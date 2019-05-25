@@ -5,6 +5,20 @@
 # ------------------------------------------------------------------------------
 # Place your own routes here, that have a HIGHER priority than the default routes.
 
+# contact:
+#     path: /contact
+#     defaults:
+#         _controller: controller.frontend:listing
+#     requirements:
+#         contenttypeslug: controller.requirement:anyContentType
+
+contactbinding:
+    path: /contact
+    defaults:
+        _controller: controller.frontend:record
+        contenttypeslug: page
+        slug: contact
+    recordslug: page/contact
 
 
 # ------------------------------------------------------------------------------

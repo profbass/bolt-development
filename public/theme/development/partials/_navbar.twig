@@ -1,5 +1,5 @@
 {# Navbar #}
-<nav class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation">
+<nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
             <span class="navbar-item">
@@ -16,7 +16,7 @@
                 {{ menu(template = 'partials/_sub_menu.twig') }}
             </div>
             <div class="navbar-end">
-                <form class="field has-addons" method="get" action="{{ path('search') }}" enctype="text/plain">
+                {# <form class="field has-addons" method="get" action="{{ path('search') }}" enctype="text/plain">
                     <label class="label is-hidden" for="search">Search</label>
                     <div class="control">
                         <input class="input" type="search" value="{% if search is defined %}{{ search|escape }}{% endif %}" placeholder="{{ __('general.phrase.search-ellipsis') }}" name="search" id="search">
@@ -24,7 +24,7 @@
                     <div class="control">
                         <button class="button is-black" type="submit">{{ __('general.phrase.search') }}</button>
                     </div>
-                </form>
+                </form> #}
             </div>
         </div>
     </div>
