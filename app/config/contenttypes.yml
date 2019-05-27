@@ -51,31 +51,32 @@ homepage:
 # list the different types of services a company provides, you can group these
 # together.
 
-pages:
-    name: Pages
-    singular_name: Page
-    fields:
-        title:
-            type: text
-            class: large
-            group: content
-        slug:
-            type: slug
-            uses: title
-        image:
-            type: image
-            placeholder: https://source.unsplash.com/1280x768/?business,workplace/__random__
-        teaser:
-            type: html
-            height: 150px
-        body:
-            type: html
-            height: 300px
-        template:
-            type: templateselect
-            filter: '*.twig'
-    taxonomy: [ groups ]
-    recordsperpage: 20
+# pages:
+#     name: Pages
+#     singular_name: Page
+#     fields:
+#         title:
+#             type: text
+#             class: large
+#             group: content
+#         slug:
+#             type: slug
+#             uses: title
+#         image:
+#             type: image
+#             placeholder: https://source.unsplash.com/1280x768/?business,workplace/__random__
+#         teaser:
+#             type: html
+#             height: 150px
+#         body:
+#             type: html
+#             height: 300px
+#         template:
+#             type: templateselect
+#             filter: '*.twig'
+#     taxonomy: [ groups ]
+#     viewless: true
+#     recordsperpage: 20
 
 
 # Entries can be used for things like 'news' or 'blogpostings'. They have a
@@ -90,8 +91,8 @@ pages:
 # shown above older entries.
 
 entries:
-    name: News
-    singular_name: News
+    name: Entry
+    singular_name: entry
     fields:
         title:
             type: text
@@ -113,10 +114,10 @@ entries:
         video:
             type: video
     relations:
-        pages:
-          multiple: false
-          order: title
-          label: Select a page
+        # pages:
+        #   multiple: false
+        #   order: title
+        #   label: Select a page
     taxonomy: [ categories, tags ]
     record_template: entry.twig
     listing_template: listing.twig
@@ -169,11 +170,11 @@ units:
             order: -id
             format: "{{ item.title|escape }} (№ {{ item.id }})"
             postfix: "By selecting an Entry, you're creating a bi-directional relationship to that Entry."
-        pages:
-            multiple: true
-            order: title
-            label: Select zero or more pages
-    taxonomy: [ categories, tags ]
+        # pages:
+        #     multiple: true
+        #     order: title
+        #     label: Select zero or more pages
+    # taxonomy: [ categories, tags ]
     show_on_dashboard: true
     default_status: published
     searchable: true
@@ -189,13 +190,35 @@ contact:
             type: text
             class: large
             group: content
-        image:
-            type: image
-            placeholder: https://source.unsplash.com/1920x640/?cityscape,landscape,nature/__random__
+        contact_name:
+            type: text
+            label: "Contact Name"
+        phone:
+            type: text
+            label: "Phone Number"
+        address1:
+            type: text
+            label: "Address Line 1"
+        address2:
+            type: text
+            label: "Address Line 2"
+        facebook:
+            type: text
+            label: "Facebook"
+        twitter:
+            type: text
+            label: "Twitter"
+        instagram:
+            type: text
+            label: "Instagram"
         content:
             type: html
             height: 300px
-    viewless: true
+        image:
+            type: image
+            placeholder: https://source.unsplash.com/1920x640/?cityscape,landscape,nature/__random__
+            group: Media
+    record_template: contact.twig
     singleton: true
     default_status: published
 

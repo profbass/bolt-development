@@ -42,6 +42,9 @@
         }
     }
 }
+.button, .input, .textarea, .select select{
+  border-radius: 0;  
+}
 
 .notification {
     ul {

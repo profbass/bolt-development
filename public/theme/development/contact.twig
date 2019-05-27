@@ -2,41 +2,177 @@
 
 {% block main %}
 
-<section class="section section-record">
-    <div class="container">
-        {# {% if record.image is not empty %}
-            <figure class="image is-2by1">
-                <img src="{{ record.image|image(1280, 660) }}" alt="{{ record.values.image.alt|default() }}"/>
-                <figcaption>
-                    {{ record.values.image.title|default() }}
-                </figcaption>
-            </figure>
-        {% endif %}
+{% for contact in contact %}
+<section class="hero hero-image is-dark is-bold is-medium" {%- if contact.image|default %} {% set filename = contact.image.file|default(contact.image) %} data-background-image="{{ asset(filename, 'files') }}" style="background-image: url({{ asset(filename, 'files') }})" {% endif -%}>
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title">{{ contact.title }}</h1>
 
-        <div class="columns is-centered">
-            <div class="column is-two-thirds">
-                <article class="content" role="article">
-                    <h1 class="title is-size-1 is-size-3-mobile">{{ record.title }}</h1>
-
-                    {# {% include 'partials/_record_meta.twig' with {'extended': true} %} #}
-
-                    {# Output all fields, in the order as defined in the contenttype.
-                                                            To change the generated html and configure the options, see:
-                                                            https://docs.bolt.cm/templating #}
-                    {% with { 'record': record, 'extended': true, 'repeaters': true, 'blocks': true } %}
-                    {{ block('sub_fields', 'partials/_sub_fields.twig') }}
-                    {% endwith %}
-
-                    {# Uncomment this if you wish to dump the entire record to the client, for debugging purposes.
-                                                            {{ dump(record) }}
-                                                            #}
-
-                    {{ include('partials/_recordfooter.twig', { 'record': record, 'extended': true }) }}
-                </article> #}
-            </div>
+            {# {% if config.get('general/payoff') %}
+                <h2 class="subtitle">{{ config.get('general/payoff') }}</h2>
+            {% endif %} #}
         </div>
     </div>
 </section>
 
-{% include "partials/_sub_recent_records.twig" %}{% endblock main %}
+
+<section class="section section-page contact-page">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-two-thirds">
+                <article class="content" role="article">
+
+                    {{ contact.content }}
+
+                    {# If there are repeaters, we should output them. #}
+                    {% with { 'record': record, 'common': false, 'repeaters': true, 'blocks': true, 'exclude': ['teaser', 'body', 'image'] } %}
+                    {{ block('sub_fields', 'partials/_sub_fields.twig') }}
+                    {% endwith %}
+
+                    {# Uncomment this if you wish to dump the entire record to the client, for debugging purposes.
+                                        {{ dump(record) }}
+                                        #}
+
+                    {# {{ include('partials/_recordfooter.twig', { 'record': record, 'extended': true }) }} #}
+                </article>
+            </div>
+            <div class="column">
+                <h5>{{ contact.contact_name }}</h5>
+                <p>{{ contact.address1 }}<br>{{ contact.address2 }}</p>
+                <p><a href="tel:{{ contact.phone }}">{{ contact.phone }}</a></p>
+                <hr>
+                {# Form #}
+                <div class="columns is-centered">
+                    <div class="column">
+                    <h2 class="is-size-5">Send Us a Message</h2>
+                    <div class="form-message"></div>
+                    <form id="contact-form" method="post" accept-charset="UTF-8" action="{{ asset('contact.php', 'theme') }}">
+
+
+                        {# {{ csrfInput() }} #}
+                        {# <input type="hidden" name="action" value="contact.php"> #}
+                        {# {{ redirectInput("") }} #}
+
+                        <section class="">
+                            <div class="field">
+                                <label class="label">Name</label>
+                                <div class="control">
+                                    <input class="input" id="nameInput" placeholder="First &amp; Last Name" type="text">
+                                </div>
+                            </div>
+
+                            {# <div class="field">
+                                <label class="label">Username</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    <input class="input is-success" placeholder="Text input" type="text" value="bulma">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <span class="icon is-small is-right">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                </div>
+                                <p class="help is-success">This username is available</p>
+                            </div> #}
+
+                            <div class="field">
+                                <label class="label">Email</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    <input class="input" id="emailInput" placeholder="myself@me.com" type="email" value="">
+
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            {# <div class="field">
+                                <label class="label">Subject</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select>
+                                            <option>Select dropdown</option>
+                                            <option>With options</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> #}
+
+                            <div class="field">
+                                <label class="label">Message</label>
+                                <div class="control">
+                                    <textarea class="textarea" id="messageField" placeholder="Your message here!"></textarea>
+                                </div>
+                            </div>
+
+                            {# <div class="field">
+                                <div class="control">
+                                    <label class="checkbox">
+                                        <input type="checkbox">
+                                        I agree to the
+                                        <a href="#">terms and conditions</a>
+                                    </label>
+                                </div>
+                            </div> #}
+
+                            {# <div class="field">
+                                <div class="control">
+                                    <label class="radio">
+                                        <input name="question" type="radio">
+                                        Yes
+                                    </label>
+                                    <label class="radio">
+                                        <input name="question" type="radio">
+                                        No
+                                    </label>
+                                </div>
+                            </div> #}
+
+                            <div class="field is-grouped">
+                                <div class="control">
+                                    <button class="button is-link">Submit</button>
+                                </div>
+                                {# <div class="control">
+                                    <button class="button is-text">Cancel</button>
+                                </div> #}
+                            </div>
+                        </section>
+                        </form>
+                    </div>
+                </div>
+                {# End Form #}
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+
+{% include "partials/_sub_recent_records.twig" %}
+
+{% endblock main %}
+
+{% block footer %}
+
+<script>
+    jQuery(document).ready(function($) {
+        $('#contact-form').on('submit', function(e) {
+            e.preventDefault();
+            var $form = $(this);
+            var $body = $('body');
+            $.ajax({
+                url: $form.attr('action'),
+                type: "POST",
+                data: $form.serialize()
+            }).done(function() {
+                $form.find('input,select,textarea').val('');
+                $body.prepend('<div class="notification"><button class="delete"></button>Thanks for reaching out! We will return your message shortly.</div>');
+                
+            }).fail(function() {
+                $body.prepend('<div class="notification"><button class="delete"></button>Oops! It broke!</div>');
+            });
+        });
+    });
+</script>
+
+{% endblock footer %}
 

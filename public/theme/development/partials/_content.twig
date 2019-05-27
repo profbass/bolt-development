@@ -21,12 +21,13 @@
         <link rel="stylesheet" href="{{ asset('css/bulma.css', 'theme') }}">
         <link rel="stylesheet" href="{{ asset('css/theme.css', 'theme') }}">
     </head>
-    <body {% if app.request.get('_route') == "homepage" %} class="front" {% endif %}>
+    <body>
         <a class="visually-hidden focusable skip-link" href="#main-content">Skip to main content</a>
         {% block body %}
 
         <header class="header" role="banner">
             {{ include('partials/_navbar.twig') }}
+            {# {{ include('partials/_header.twig') }} #}
         </header>
 
         {{ widgets('main_top') }}

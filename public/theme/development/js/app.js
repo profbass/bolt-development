@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     normalizeBrightness();
 
-    document.querySelector('.notification > button.delete').addEventListener('click', function(e) {
-        e.target.parentElement.style.display = 'none';
-    }, false);
+    // document.querySelector('.notification > button.delete').addEventListener('click', function(e) {
+    //     e.target.parentElement.style.display = 'none';
+    // }, false);
 });
 
 /*!

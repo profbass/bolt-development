@@ -2,16 +2,14 @@
 # details: https://docs.bolt.cm/configuration/menus
 
 main:
-    - label: Spark Developmnent
-      title: Learn more about our spark development
+    - label: Cantilevers
+      title: Learn more about our Cantilevers at CTC
       path: homepage
       class: first
     - label: Units
       path: units/
     - label: News
-      path: news/
+      path: entry/
     - label: Contact
       path: contact/
-    - label: The Bolt site
-      link: http://bolt.cm
       class: last
