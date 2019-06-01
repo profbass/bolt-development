@@ -18,65 +18,46 @@
 
 <section class="section section-page contact-page">
     <div class="container">
-        <div class="columns">
+        <div class="columns is-centered">
             <div class="column is-two-thirds">
                 <article class="content" role="article">
 
-                    {{ contact.content }}
+                    <h2 class="has-text-centered">{{ contact.address1 }}<br>{{ contact.address2 }}</h2>
+                    <h4 class="has-text-centered">{{ contact.contact_name }}<br><a class="is-italic" href="tel:{{ contact.phone }}">{{ contact.phone }}</a></h4>
+
+                    <div class="has-text-justified">{{ contact.content }}</div>
 
                     {# If there are repeaters, we should output them. #}
                     {% with { 'record': record, 'common': false, 'repeaters': true, 'blocks': true, 'exclude': ['teaser', 'body', 'image'] } %}
                     {{ block('sub_fields', 'partials/_sub_fields.twig') }}
                     {% endwith %}
 
-                    {# Uncomment this if you wish to dump the entire record to the client, for debugging purposes.
-                                        {{ dump(record) }}
-                                        #}
-
                     {# {{ include('partials/_recordfooter.twig', { 'record': record, 'extended': true }) }} #}
                 </article>
-            </div>
-            <div class="column">
-                <h5>{{ contact.contact_name }}</h5>
-                <p>{{ contact.address1 }}<br>{{ contact.address2 }}</p>
-                <p><a href="tel:{{ contact.phone }}">{{ contact.phone }}</a></p>
                 <hr>
                 {# Form #}
-                <div class="columns is-centered">
+                <div class="columns is-centered slide-in">
                     <div class="column">
                     <h2 class="is-size-5">Send Us a Message</h2>
                     <div class="form-message"></div>
                     <form id="contact-form" method="post" accept-charset="UTF-8" action="{{ asset('contact.php', 'theme') }}">
-
-
                         {# {{ csrfInput() }} #}
                         {# <input type="hidden" name="action" value="contact.php"> #}
                         {# {{ redirectInput("") }} #}
 
                         <section class="">
                             <div class="field">
-                                <label class="label">Name</label>
-                                <div class="control">
-                                    <input class="input" id="nameInput" placeholder="First &amp; Last Name" type="text">
-                                </div>
-                            </div>
-
-                            {# <div class="field">
-                                <label class="label">Username</label>
+                                {# <label class="label">Name</label> #}
                                 <div class="control has-icons-left has-icons-right">
-                                    <input class="input is-success" placeholder="Text input" type="text" value="bulma">
+                                    <input class="input" id="nameInput" placeholder="First &amp; Last Name" type="text">
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-user"></i>
                                     </span>
-                                    <span class="icon is-small is-right">
-                                        <i class="fas fa-check"></i>
-                                    </span>
                                 </div>
-                                <p class="help is-success">This username is available</p>
-                            </div> #}
+                            </div>
 
                             <div class="field">
-                                <label class="label">Email</label>
+                                {# <label class="label">Email</label> #}
                                 <div class="control has-icons-left has-icons-right">
                                     <input class="input" id="emailInput" placeholder="myself@me.com" type="email" value="">
 
@@ -86,55 +67,17 @@
                                 </div>
                             </div>
 
-                            {# <div class="field">
-                                <label class="label">Subject</label>
-                                <div class="control">
-                                    <div class="select">
-                                        <select>
-                                            <option>Select dropdown</option>
-                                            <option>With options</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div> #}
-
                             <div class="field">
-                                <label class="label">Message</label>
+                                {# <label class="label">Message</label> #}
                                 <div class="control">
                                     <textarea class="textarea" id="messageField" placeholder="Your message here!"></textarea>
                                 </div>
                             </div>
 
-                            {# <div class="field">
-                                <div class="control">
-                                    <label class="checkbox">
-                                        <input type="checkbox">
-                                        I agree to the
-                                        <a href="#">terms and conditions</a>
-                                    </label>
-                                </div>
-                            </div> #}
-
-                            {# <div class="field">
-                                <div class="control">
-                                    <label class="radio">
-                                        <input name="question" type="radio">
-                                        Yes
-                                    </label>
-                                    <label class="radio">
-                                        <input name="question" type="radio">
-                                        No
-                                    </label>
-                                </div>
-                            </div> #}
-
                             <div class="field is-grouped">
                                 <div class="control">
                                     <button class="button is-link">Submit</button>
                                 </div>
-                                {# <div class="control">
-                                    <button class="button is-text">Cancel</button>
-                                </div> #}
                             </div>
                         </section>
                         </form>

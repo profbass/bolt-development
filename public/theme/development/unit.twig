@@ -7,6 +7,9 @@
     <div class="hero-body">
         <div class="container has-text-centered">
             <h1 class="title">{{ record.title }}</h1>
+            {% if record.tagline  %}
+                <h2 class="subtitle">{{ record.tagline }}</h2>
+            {% endif %}
         </div>
     </div>
 </section>
@@ -25,14 +28,14 @@
         <div class="columns is-centered">
             <div class="column is-two-thirds">
                 <article class="content" role="article">
-                    <h1 class="title is-size-1 is-size-3-mobile">{{ record.title }}</h1>
+                    {# <h1 class="title is-size-1 is-size-3-mobile">{{ record.title }}</h1> #}
 
                     {# {% include 'partials/_record_meta.twig' with {'extended': true} %} #}
 
-                    {% with { 'record': record, 'extended': true, 'repeaters': true, 'blocks': true, 'exclude': ['imagelist','image'] } %}
+                    {% with { 'record': record, 'extended': true, 'repeaters': true, 'blocks': true, 'exclude': ['title','imagelist','image'] } %}
                     {{ block('sub_fields', 'partials/_sub_fields.twig') }}
                     {% endwith %}
-
+            
                     {{ include('partials/_recordfooter.twig', { 'record': record, 'extended': true }) }}
                 </article>
             </div>
@@ -41,7 +44,7 @@
 </section>
 {# Image Gallery #}
 <div class="container is-fluid">
-    {% with { 'record': record, 'extended': true, 'repeaters': true, 'blocks': true, 'exclude': ['html','title','image'] } %}
+    {% with { 'record': record, 'extended': true, 'repeaters': true, 'blocks': true, 'exclude': ['html','title','image','video','filelist'] } %}
     {{ block('sub_fields', 'partials/_sub_fields.twig') }}
     {% endwith %}
 </div>

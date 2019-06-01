@@ -17,29 +17,29 @@ homepage:
                 shown on the homepage of the website, as the name implies. To change the
                 <em><strong>name</strong></em> of the site, as is shown in the header, and the tab
                 in the webbrowser, edit <code>sitename:</code> in the configuration file.
-        image:
-            type: image
-            placeholder: https://source.unsplash.com/1920x640/?cityscape,landscape,nature/__random__
+        
         teaser:
             type: html
             height: 150px
         content:
             type: html
             height: 300px
-        contentlink:
-            type: text
-            label: Link
-            placeholder: 'contenttype/slug or http://example.org/'
-            postfix: "Use this to add a link for this Homepage. This could either be an 'internal' link like <tt>page//about</tt>, if you use a contenttype/slug combination. Otherwise use a proper URL, like `http://example.org`."
         slug:
             type: slug
             uses: title
             group: meta
+        image:
+            type: image
+            placeholder: https://source.unsplash.com/1920x640/?cityscape,landscape,nature/__random__
+            group: Media
+            label: "Cover Photo"
+        video:
+            type: video
     viewless: true
     singleton: true
     default_status: published
-    icon_many: "fa:home"
-    icon_one: "fa:home"
+    icon_many: "fa:star"
+    icon_one: "fa:star"
 
 
 # Pages can be used for the more 'static' pages on your site. This content-type
@@ -78,6 +78,118 @@ homepage:
 #     viewless: true
 #     recordsperpage: 20
 
+#Condo Units
+units:
+    name: Units 
+    slug: units
+    singular_name: Unit
+    singular_slug: unit
+    fields:
+        title:
+            type: text
+            label: "Unit Name"
+            class: large
+            required: true
+            pattern: ".{2,255}" # see: http://html5pattern.com/
+            error: "The Title field is required, and must contain at least 2 characters"
+            group: Text
+        tagline:
+            type: text
+            label: "Tagline"
+        slug:
+            type: slug
+            uses: [ title ]
+        html:
+            type: html
+            height: 300px
+            label: "Content"
+        amenities:
+            type: repeater
+            fields:
+                amenity:
+                    type: text
+        image:
+            type: image
+            label: "Cover Photo"
+            extensions: [ gif, jpg, png ]
+            placeholder: https://source.unsplash.com/1280x768/?animal,koala,kitten,puppy,cute/__random__
+            group: Media
+        video:
+            type: video
+            group: Media
+        filelist:
+            type: filelist
+            label: "Documents"
+            group: Media
+            extensions: [ pdf]
+        imagelist:
+            type: imagelist
+            attrib: title
+            label: "Photo Gallery"
+            group: Media
+    relations:
+        entries:
+            multiple: false
+            label: "Choose an entry"
+            order: -id
+            format: "{{ item.title|escape }} (№ {{ item.id }})"
+            postfix: "By selecting an Entry, you're creating a bi-directional relationship to that Entry."
+        # pages:
+        #     multiple: true
+        #     order: title
+        #     label: Select zero or more pages
+    # taxonomy: [ categories, tags ]
+    show_on_dashboard: true
+    default_status: published
+    searchable: true
+    sort: -datepublish
+    icon_many: "fa:building"
+    icon_one: "fa:building"
+
+
+
+# Neighborhood form and informtion
+neighborhood:
+    name: Neighborhood
+    singular_name: Neighborhood
+    fields:
+        title:
+            type: text
+            class: large
+            group: content
+        tagline:
+            type: text
+            group: content
+            label: "Tagline"
+        content:
+            type: html
+            height: 300px
+        image:
+            type: image
+            placeholder: https://source.unsplash.com/1920x640/?cityscape,landscape,nature/__random__
+            group: Media
+            label: "Cover Photo"
+        video:
+            type: video
+            group: Media
+        filelist:
+            type: filelist
+            label: "Documents"
+            group: Media
+            extensions: [ pdf]
+        imagelist:
+            type: imagelist
+            attrib: title
+            label: "Photo Gallery"
+            group: Media
+    record_template: neighborhood.twig
+    singleton: true
+    default_status: published
+    icon_many: "fa:home"
+    icon_one: "fa:home"
+
+    
+
 
 # Entries can be used for things like 'news' or 'blogpostings'. They have a
 # 'teaser', which can be used for a short blurb on listing-pages, allowing
@@ -91,8 +203,8 @@ homepage:
 # shown above older entries.
 
 entries:
-    name: Entry
-    singular_name: entry
+    name: News
+    singular_name: news
     fields:
         title:
             type: text
@@ -113,7 +225,7 @@ entries:
             placeholder: https://source.unsplash.com/1280x768/?business,workspace,interior/__random__
         video:
             type: video
-    relations:
+    # relations:
         # pages:
         #   multiple: false
         #   order: title
@@ -124,62 +236,13 @@ entries:
     listing_records: 10
     default_status: published
     sort: -datepublish
+    searchable: true
     recordsperpage: 20
-
-#Condo Units
-units:
-    name: Units 
-    slug: units
-    singular_name: Unit
-    singular_slug: unit
-    fields:
-        title:
-            type: text
-            class: large
-            required: true
-            pattern: ".{2,255}" # see: http://html5pattern.com/
-            error: "The Title field is required, and must contain at least 2 characters"
-            group: Text
-        slug:
-            type: slug
-            uses: [ title ]
-        html:
-            type: html
-            height: 150px
-        geolocation:
-            type: geolocation
-            group: Media
-        video:
-            type: video
-        image:
-            type: image
-            attrib: title # Note: retrieve this in your template with {{ record.values.image.title }}
-            extensions: [ gif, jpg, png ]
-            placeholder: https://source.unsplash.com/1280x768/?animal,koala,kitten,puppy,cute/__random__
-        imagelist:
-            type: imagelist
-        file:
-            type: file
-            group: files
-        filelist:
-            type: filelist
-    relations:
-        entries:
-            multiple: false
-            label: "Choose an entry"
-            order: -id
-            format: "{{ item.title|escape }} (№ {{ item.id }})"
-            postfix: "By selecting an Entry, you're creating a bi-directional relationship to that Entry."
-        # pages:
-        #     multiple: true
-        #     order: title
-        #     label: Select zero or more pages
-    # taxonomy: [ categories, tags ]
     show_on_dashboard: true
     default_status: published
-    searchable: true
-    icon_many: "fa:gift"
-    icon_one: "fa:gift"
+    icon_many: "fa:pencil"
+    icon_one: "fa:pencil"
+
 
 # Contact form and informtion
 contact:
@@ -218,10 +281,13 @@ contact:
             type: image
             placeholder: https://source.unsplash.com/1920x640/?cityscape,landscape,nature/__random__
             group: Media
+            label: "Cover Photo"
     record_template: contact.twig
     singleton: true
+    show_on_dashboard: false
     default_status: published
-
+    icon_many: "fa:envelope"
+    icon_one: "fa:envelope"
 
 # The 'Showcases' is not particularly useful in most cases, but it does a good
 # job of showcasing most of the available fieldtypes. Feel free to delete it, or
@@ -366,7 +432,7 @@ blocks:
             type: image
             attrib: title
             extensions: [ gif, jpg, png ]
-    show_on_dashboard: true
+    show_on_dashboard: false
     viewless: true
     default_status: published
     searchable: false

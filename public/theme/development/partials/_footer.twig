@@ -5,8 +5,8 @@
             <div class="level-left">
                 <div class="level-item">
                     <p>
-                        &copy; {{ "now"|date("Y") }} &bullet;
-                        {{ __("This website is <a href='%url%' target='_blank' title='Sophisticated, lightweight & simple CMS'>Built with Bolt</a>.", {'%url%':'https://bolt.cm'}) }}
+                        &copy; {{ "now"|date("Y") }}
+                       
                     </p>
                 </div>
             </div>
@@ -25,39 +25,3 @@
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <script src="{{ asset('js/normalizeBrightness.js', 'theme') }}"></script>
 <script src="{{ asset('js/app.js', 'theme') }}"></script>
-
-<script>
-    
-
-    jQuery(document).ready(function ($) {
-        function notificationMessage(){
-            document.addEventListener('DOMContentLoaded', () => {
-                (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-                    $notification = $delete.parentNode;
-                    $delete.preventDefault();
-                    $delete.addEventListener('click', () => {
-                    $notification.parentNode.removeChild($notification);
-                    });
-                });
-            });
-        }
-
-        $('#contact-form').on('submit', function (e) {
-            e.preventDefault();
-            console.log("You hit it");
-            var $form = $(this);
-            var $body = $('.form-message');
-            $.ajax({url: $form.attr('action'), type: "POST", data: $form.serialize()}).done(function () {
-                $form.find('input,textarea').val('');
-                $body.append('<div class="notification is-primary"><button class="delete"></button>Thanks for reaching out! We will return your message shortly.</div>');
-
-            }).fail(function () {
-                $body.append('<div class="notification is-danger"><button class="delete"></button>Oops! It broke!</div>');
-                notificationMessage();
-            });
-        });
-    });
-    </script>
-
-
-{% block footer %}{% endblock footer %}

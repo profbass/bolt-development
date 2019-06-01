@@ -8,8 +8,10 @@ main:
       class: first
     - label: Units
       path: units/
+    - label: Neighborhood
+      path: neighborhood/
     - label: News
-      path: entry/
+      path: news/
     - label: Contact
       path: contact/
       class: last

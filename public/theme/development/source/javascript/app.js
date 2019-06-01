@@ -25,7 +25,63 @@ document.addEventListener('DOMContentLoaded', function () {
 
     normalizeBrightness();
 
-    // document.querySelector('.notification > button.delete').addEventListener('click', function(e) {
-    //     e.target.parentElement.style.display = 'none';
-    // }, false);
+    $('#contact-form').on('submit', function (e) {
+        e.preventDefault();
+        var $form = $(this);
+        var $body = $('.form-message');
+        $.ajax({ url: $form.attr('action'), type: "POST", data: $form.serialize() }).done(function () {
+            $form.find('input,textarea').val('');
+            $body.append('<div class="notification is-primary"><button class="delete"></button>Thanks for reaching out! We will return your message shortly.</div>');
+        }).fail(function () {
+            $body.append('<div class="notification is-danger"><button class="delete"></button>Oops! It broke!</div>');
+        });
+    });
+
+    deleteButton = $('button.delete');
+    $.each(deleteButton, function (e) {
+        $notification = $(e).parentNode;
+        $(e).preventDefault();
+        $(e).on('click', function(){
+            $notification.parentNode.removeChild($notification);
+            console.log("Closey");
+        });
+    });
+
+    // document.addEventListener('DOMContentLoaded', () => {
+    //     (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+    //         $notification = $delete.parentNode;
+    //         $delete.preventDefault();
+    //         $delete.addEventListener('click', () => {
+    //             $notification.parentNode.removeChild($notification);
+    //             console.log("Closey");
+    //         });
+    //     });
+    // });
+    
+
+    deleteButton.on('click', function(e) {
+        console.log("sdfds");
+        e.target.parentElement.style.display = 'none';
+        
+    }, false);
+
+    $(window).on('scroll', function () {
+        $(".slide-in").each(function () {
+            if (isScrolledIntoView($(this))) {
+                console.log('scrolly');
+                $(this).addClass('slide-up-fade-in');
+            }
+        });
+    });
+
+    function isScrolledIntoView(elem) {
+        var docViewTop = $(window).scrollTop();
+        var docViewBottom = docViewTop + $(window).height();
+
+        var elemTop = $(elem).offset().top;
+        var elemBottom = elemTop + $(elem).height();
+
+        return ((elemTop <= (docViewBottom + 20)));
+    }
+
 });
