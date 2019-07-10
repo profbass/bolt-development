@@ -5,25 +5,37 @@
 <section class="section slide-in">
 
     <div class="container">
-        <div class="columns">
-            <div class="column is-two-thirds">
+       {# {{ homepage.content }} #}
+       <div class="corner-number">{# <i class="fas fa-adjust"> #} 0.1</i></div>
+        <div class="columns background-light">
+            <div class="column">
+                {# {{ include('partials/_aside.twig') }} #}
+                {%- if homepage.callout_photo|default %}
+                    {% set calloutphoto = homepage.callout_photo.file|default(homepage.callout_photo) %}
+                    <figure class="image">
+                        <img src="{{ asset(calloutphoto, 'files') }}" />
+                    </figure>
+                {% endif %}
+            </div>
+            <div class="column is-vertical-center">
 
                 {% setcontent homepage = "homepage" limit 1 returnsingle %}
                 {% if homepage %}
-                <div class="content">
-                    <h2 class="title is-size-1 is-size-3-mobile">{{ homepage.title }}</h2>
-                    <div class="teaser">{{ homepage.teaser }}</div>
-                    {{ homepage.content }}
-
-                </div>
+                    <div class="content">
+                        <h2 class="is-size-4 is-size-3-mobile">{{ homepage.title }}</h2>
+                        <div>
+                            {{ homepage.teaser }}
+                            <p><a class="button">Explore The Vision</a></p>
+                        </div>
+                    </div>
                 {% else %}
                     {# Remove this include if you don't need it anymore. #}
                     {{ include('partials/_no_content.twig') }}
                 {% endif %}
             </div>
-            <div class="column">
-                {{ include('partials/_aside.twig') }}
-            </div>
+            {# <pre>
+                {{ dump(homepage) }}
+            </pre> #}
         </div>
     </div>
 </section>
@@ -33,7 +45,7 @@
 <section class="section section-units hero is-success is-bold">
 
     <div class="container slide-in">
-        <h2 class="title">Our Units</h2>
+        <h2 class="title">Cantilevers Units</h2>
         <div class="columns slide-in">
             {% setcontent units = 'units/latest/3' %}
             {% for unit in units %}
@@ -47,7 +59,7 @@
                         <div class="card-content content">
                             <h3><a href="{{ unit.link() }}">{{ unit.title }}</a></h3>
                             <p>{{ unit.excerpt }}</p>
-                            <a class="button is-primary" href="{{ unit.link() }}">
+                            <a class="button" href="{{ unit.link() }}">
                                 {{ __('general.phrase.read-more') }}
                             </a>
                         </div>
@@ -67,7 +79,7 @@
 <section class="section section-latest-entries">
 
     <div class="container ">
-        <h2 class="title">Latest News</h2>
+        {# <h2 class="title">Latest News</h2> #}
         {% setcontent entries = 'entries/latest/3' %}
         {% for entry in entries %}
             <article role="article" class="media columns slide-in">
@@ -88,8 +100,8 @@
         {% else %}
             <p>{{ __("general.phrase.no-content-found") }}</p>
         {% endfor %}
-        <div class="buttons has-addons is-right">
-            <a class="button is-primary" href="{{ path('contentlisting', {'contenttypeslug': 'entries'}) }}">Read more <span class="is-hidden"> Entries</span></a>
+        <div class="buttons">
+            <a class="button" href="{{ path('contentlisting', {'contenttypeslug': 'entries'}) }}">Read more <span class="is-hidden"> Entries</span></a>
         </div>
     </div>
 </section>

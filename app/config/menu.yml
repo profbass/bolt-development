@@ -11,7 +11,7 @@ main:
     - label: Neighborhood
       path: neighborhood/
     - label: News
-      path: news/
+      path: entries/
     - label: Contact
       path: contact/
       class: last

@@ -3,7 +3,7 @@
     setcontent tag.. ct.slug ~ "/latest/3" concatenates the slug of the
     contenttype with /latest/3, so it becomes something like "pages/latest/3".
 #}
-<section class="section section-pages hero is-primary is-bold">
+<section class="section section-pages is-primary hero is-bold">
     <div class="container">
         <div class="columns">
             {% for ct in config.get('contenttypes') if not ct.viewless|default(false) %}
@@ -20,7 +20,7 @@
                                 <li>{{ __('contenttypes.generic.no-recent', {'%contenttype%': ct.slug}) }}</li>
                             {% endfor %}
                         </ul>
-                        <a class="button is-primary" href="{{ path('contentlisting', {'contenttypeslug': ct.slug}) }}">{{ __('contenttypes.generic.overview',{'%contenttypes%': ct.name}) }}</a>
+                        <a class="button" href="{{ path('contentlisting', {'contenttypeslug': ct.slug}) }}">{{ __('contenttypes.generic.overview',{'%contenttypes%': ct.name}) }}</a>
                     </div>
                 </div>
             </div>

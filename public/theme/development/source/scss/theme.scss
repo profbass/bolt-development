@@ -7,6 +7,17 @@
 @import 'node_modules/baguettebox.js/src/baguetteBox';
 @import 'node_modules/prismjs/themes/prism';
 
+.background-light{
+    background: $light;
+}
+.background-medium{
+    background: $medium;
+    color: white;
+}
+.background-dark{
+    background: $dark;
+    color: white;
+}
 .visually-hidden:not(:focus):not(:active) {
     position: absolute !important;
     height: 1px;
@@ -22,13 +33,29 @@
     top: 60px;
     z-index: 1;
 }
-
-.navbar-brand {
-    .navbar-item {
-        font-family: $font-serif;
-        font-size: $size-large;
-        font-weight: bold;
-    }
+.subtitle{
+    display: inline-block;
+    position: relative;
+}
+.subtitle:before{
+    left: -75px;
+    content: "";
+    display: block;
+    width: 60px;
+    height: 0;
+    border-bottom: 1px solid #fff;
+    position: absolute;
+    top: 50%;
+}
+.subtitle:after{
+    right: -75px;
+    content: "";
+    display: block;
+    width: 60px;
+    height: 0;
+    border-bottom: 1px solid #fff;
+    position: absolute;
+    top: 50%;
 }
 
 .navbar-end {
@@ -147,7 +174,7 @@ p.meta {
     }
     h1.title  {
         font-size: $title-size;
-        font-weight: bold;
+        font-weight: light;
     }
     h2.subtitle  {
         font-size: $subtitle-size;
@@ -176,7 +203,38 @@ p.meta {
 }
 
 .footer {
-  padding: 2rem 1.5rem
+  padding: 4rem 1.5rem;
+    font-size: 13px;
+    font-weight: 200;
+    p,li{ 
+        text-transform: uppercase;
+    }
+    .quote{
+        display: block;
+        font-size: 35px;
+        line-height: 1.1428;
+        font-style: italic;
+        font-family: $font-serif;
+        opacity: 0.2;
+    }
+    .author{
+        display: inline-block;
+        position: relative;
+        text-transform: uppercase;
+        font-weight:600;
+        margin-top:20px;
+        color:$link;
+        &::before{
+            left: -75px;
+            content: "";
+            display: block;
+            width: 60px;
+            height: 0;
+            border-bottom: 1px solid $primary;
+            position: absolute;
+            top: 50%;
+        }
+    }
 }
 
 // https://antoningrele.github.io/img-brightness-normalization/normalizeBrightness.css

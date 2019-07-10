@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
 
     // Get all "navbar-burger" elements
     var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if ($navbarBurgers.length > 0) {
 
         // Add a click event on each of them
-        $navbarBurgers.forEach(function ($el) {
-            $el.addEventListener('click', function () {
+        $navbarBurgers.forEach(function($el) {
+            $el.addEventListener('click', function() {
 
                 // Get the target from the "data-target" attribute
                 var target = $el.dataset.target;
@@ -25,26 +25,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
     normalizeBrightness();
 
-    $('#contact-form').on('submit', function (e) {
+    $('#contact-form').on('submit', function(e) {
         e.preventDefault();
         var $form = $(this);
         var $body = $('.form-message');
-        $.ajax({ url: $form.attr('action'), type: "POST", data: $form.serialize() }).done(function () {
+        $.ajax({ url: $form.attr('action'), type: "POST", data: $form.serialize() }).done(function() {
             $form.find('input,textarea').val('');
             $body.append('<div class="notification is-primary"><button class="delete"></button>Thanks for reaching out! We will return your message shortly.</div>');
-        }).fail(function () {
+        }).fail(function() {
             $body.append('<div class="notification is-danger"><button class="delete"></button>Oops! It broke!</div>');
         });
     });
 
     deleteButton = $('button.delete');
-    $.each(deleteButton, function (e) {
+    $.each(deleteButton, function(e) {
         $notification = $(e).parentNode;
         $(e).preventDefault();
-        $(e).on('click', function(){
+        $(e).on('click', function() {
             $notification.parentNode.removeChild($notification);
             console.log("Closey");
         });
+    });
+
+    // toggle class for nav based on scroll position
+    $(window).scroll(function() {
+        var scroll = $(window).scrollTop();
+        var navLogo = $("#nav-logo");
+        if (scroll >= 50) {
+            navLogo.addClass('logo-small');
+        } else if (scroll <= 50) {
+            navLogo.removeClass('logo-small');
+        }
+    });
+
+    $(window).load(function() {
+        $('#loading').fadeOut(500);
     });
 
     // document.addEventListener('DOMContentLoaded', () => {
@@ -57,18 +72,18 @@ document.addEventListener('DOMContentLoaded', function () {
     //         });
     //     });
     // });
-    
+
 
     deleteButton.on('click', function(e) {
         console.log("sdfds");
         e.target.parentElement.style.display = 'none';
-        
+
     }, false);
 
-    $(window).on('scroll', function () {
-        $(".slide-in").each(function () {
+    $(window).on('scroll', function() {
+        $(".slide-in").each(function() {
             if (isScrolledIntoView($(this))) {
-                console.log('scrolly');
+                //console.log('scrolly');
                 $(this).addClass('slide-up-fade-in');
             }
         });

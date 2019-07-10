@@ -26,13 +26,18 @@ homepage:
             height: 300px
         slug:
             type: slug
-            uses: title
+            uses: title 
             group: meta
         image:
             type: image
             placeholder: https://source.unsplash.com/1920x640/?cityscape,landscape,nature/__random__
             group: Media
             label: "Cover Photo"
+        callout_photo:
+            type: image
+            placeholder: https://source.unsplash.com/1920x640/?cityscape,landscape,nature/__random__
+            group: Media
+            label: "Top Callout"
         video:
             type: video
     viewless: true

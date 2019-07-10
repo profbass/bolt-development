@@ -14,7 +14,7 @@
 {% macro display_menu_item(item, loop, extraclass, withsubmenus) %}
     {% from _self import display_menu_item %}
     {% spaceless %}
-    <p class="level-item">
+    <p>
         <a href="{{ item.link }}" title='{{ item.title|default('')|escape }}' class='{{ item.class|default('') }}'>
             {{- item.label|default('-') -}}
         </a>
